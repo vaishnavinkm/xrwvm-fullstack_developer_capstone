@@ -12,6 +12,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 import logging
 import json
+import requests 
 from django.views.decorators.csrf import csrf_exempt
 from .populate import initiate
 from .restapis import get_request, analyze_review_sentiments, post_review
@@ -143,7 +144,9 @@ def get_dealer_reviews(request, dealer_id):
             # review_detail['sentiment'] = response['sentiment']
         return JsonResponse({"status": 200, "reviews": reviews})
     else:
-        return JsonResponse({"status": 400, "message": "Bad Request"})
+        return JsonResponse(
+            {"status": 400, "message": "Bad Request"}
+        )
 
 
 # Create a `get_dealer_details` view to render the dealer details
@@ -167,11 +170,17 @@ def add_review(request):
         try:
             post_review(data)  # Call the post_review function to insert the review
             return JsonResponse({"status": 200})  # Success response
-        except requests.exceptions.RequestException as e:  # Catch request-related errors
+        except requests.exceptions.RequestException as e:  
+            # Catch request-related errors
             print(f"Request error: {e}")
             return JsonResponse({"status": 401, "message": "Error in posting review"})
-        except Exception as e:  # Catch any other unexpected errors
+        except Exception as e:  
+            # Catch any other unexpected errors
             print(f"Unexpected error: {e}")
-            return JsonResponse({"status": 500, "message": "Unexpected error"})
+            return JsonResponse(
+                {"status": 500, "message": "Unexpected error"}
+            )
     else:
-        return JsonResponse({"status": 403, "message": "Unauthorized"})
+           return JsonResponse(
+            {"status": 403, "message": "Unauthorized"}
+        )
