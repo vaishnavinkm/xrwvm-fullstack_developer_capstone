@@ -29,7 +29,7 @@ def get_request(endpoint, **kwargs):
         return response.json()
     except Exception as err:
         # If any error occurs
-         print(f"Request exception occurred: {err}")
+        print(f"Unexpected {err=}, {type(err)=}")
 
 
 # def analyze_review_sentiments(text):
@@ -56,4 +56,4 @@ def post_review(data_dict):
         return response.json()
     except Exception as err:
         # Catch any other unexpected exception
-         print(f"Request exception occurred: {err}")
+        print(f"Unexpected {err=}, {type(err)=}")
