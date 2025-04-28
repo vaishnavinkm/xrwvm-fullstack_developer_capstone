@@ -174,6 +174,8 @@ def add_review(request):
         except Exception as e:
             # Catch any other unexpected errors
             print(f"Unexpected error: {e}")
-            return JsonResponse({"status": 500, "message": "Unexpected error"})
+            return JsonResponse(
+                {"status": 500, "message": "Unexpected error"}
+            )
     else:
         return JsonResponse({"status": 403, "message": "Unauthorized"})
