@@ -12,7 +12,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 import logging
 import json
-import requests 
+import requests
 from django.views.decorators.csrf import csrf_exempt
 from .populate import initiate
 from .restapis import get_request, analyze_review_sentiments, post_review
@@ -101,10 +101,7 @@ def get_cars(request):
     car_models = CarModel.objects.select_related("car_make")
     cars = []
     for car_model in car_models:
-        cars.append({
-            "CarModel": car_model.name,
-            "CarMake": car_model.car_make.name
-        })
+        cars.append({"CarModel": car_model.name, "CarMake": car_model.car_make.name})
     return JsonResponse({"CarModels": cars})
 
 
@@ -144,9 +141,7 @@ def get_dealer_reviews(request, dealer_id):
             # review_detail['sentiment'] = response['sentiment']
         return JsonResponse({"status": 200, "reviews": reviews})
     else:
-        return JsonResponse(
-            {"status": 400, "message": "Bad Request"}
-        )
+        return JsonResponse({"status": 400, "message": "Bad Request"})
 
 
 # Create a `get_dealer_details` view to render the dealer details
@@ -166,21 +161,19 @@ def get_dealer_details(request, dealer_id):
 # ...
 def add_review(request):
     if not request.user.is_anonymous:  # Ensure the user is authenticated
-        data = json.loads(request.body)  # Load the JSON data from the request body
+        # Load the JSON data from the request body
+        data = json.loads(request.body)
         try:
-            post_review(data)  # Call the post_review function to insert the review
+            # Call the post_review function to insert the review
+            post_review(data)
             return JsonResponse({"status": 200})  # Success response
-        except requests.exceptions.RequestException as e:  
+        except requests.exceptions.RequestException as e:
             # Catch request-related errors
             print(f"Request error: {e}")
             return JsonResponse({"status": 401, "message": "Error in posting review"})
-        except Exception as e:  
+        except Exception as e:
             # Catch any other unexpected errors
             print(f"Unexpected error: {e}")
-            return JsonResponse(
-                {"status": 500, "message": "Unexpected error"}
-            )
+            return JsonResponse({"status": 500, "message": "Unexpected error"})
     else:
-           return JsonResponse(
-            {"status": 403, "message": "Unauthorized"}
-        )
+        return JsonResponse({"status": 403, "message": "Unauthorized"})
