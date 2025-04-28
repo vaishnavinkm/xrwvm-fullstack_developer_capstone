@@ -167,13 +167,16 @@ def get_dealer_details(request, dealer_id):
 # def add_review(request):
 # ...
 def add_review(request):
-    if not request.user.is_anonymous:
-        data = json.loads(request.body)
+    if not request.user.is_anonymous:  # Ensure the user is authenticated
+        data = json.loads(request.body)  # Load the JSON data from the request body
         try:
-            post_review(data)
-            return JsonResponse({"status": 200})
-        except requests.exceptions.RequestException as e:
+            post_review(data)  # Call the post_review function to insert the review
+            return JsonResponse({"status": 200})  # Success response
+        except requests.exceptions.RequestException as e:  # Catch request-related errors
             print(f"Request error: {e}")
             return JsonResponse({"status": 401, "message": "Error in posting review"})
+        except Exception as e:  # Catch any other unexpected errors
+            print(f"Unexpected error: {e}")
+            return JsonResponse({"status": 500, "message": "Unexpected error"})
     else:
         return JsonResponse({"status": 403, "message": "Unauthorized"})
