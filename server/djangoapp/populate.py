@@ -59,7 +59,7 @@ def initiate():
         },
         {
            "name": "A4",
-           "type": "SUV", 
+           "type": "SUV",
            "year": 2023,
            "car_make": car_make_instances[2]
         },

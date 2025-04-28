@@ -58,4 +58,3 @@ def post_review(data_dict):
         print(f"Request exception occurred: {err}")
     except Exception as err:
         print(f"Unexpected {err=}, {type(err)=}")
-

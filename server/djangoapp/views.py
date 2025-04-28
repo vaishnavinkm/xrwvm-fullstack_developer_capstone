@@ -1,7 +1,4 @@
 # Uncomment the required imports before adding the code
-
-
-
 # from django.http import HttpResponseRedirect, HttpResponse
 # from django.contrib.auth.models import User
 # from django.shortcuts import get_object_or_404, render, redirect
@@ -57,7 +54,6 @@ def logout_request(request):
 # Create a `registration` view to handle sign up request
 @csrf_exempt
 def registration(request):
-    
 
     data = json.loads(request.body)
     username = data["userName"]
@@ -66,7 +62,6 @@ def registration(request):
     last_name = data["lastName"]
     email = data["email"]
     username_exist = False
-    
     try:
         # Check if user already exists
         User.objects.get(username=username)
@@ -106,17 +101,17 @@ def get_cars(request):
     cars = []
     for car_model in car_models:
         cars.append({
-            "CarModel": car_model.name, 
+            "CarModel": car_model.name,
             "CarMake": car_model.car_make.name
         })
     return JsonResponse({"CarModels": cars})
 
 
-# # Update the `get_dealerships` view to render the index page with
+# Update the `get_dealerships` view to render the index page with
 # a list of dealerships
 # def get_dealerships(request):
 # ...
-# Update the `get_dealerships` render list of dealerships 
+# Update the `get_dealerships` render list of dealerships
 # all by default, particular state if state is passed
 def get_dealerships(request, state="All"):
     if state == "All":
