@@ -54,7 +54,7 @@ def post_review(data_dict):
         response = requests.post(request_url, json=data_dict)
         print(response.json())
         return response.json()
-    except requests.exceptions.RequestException as err::
+    except requests.exceptions.RequestException as err:
          print(f"Request exception occurred: {err}")
     except Exception as err:
         # Catch any other unexpected exception
