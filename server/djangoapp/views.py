@@ -137,7 +137,8 @@ def get_dealer_reviews(request, dealer_id):
             else:
                 review_detail["sentiment"] = "unknown"
                 print(
-                    f"Sentiment analysis failed for review: {review_detail['review']}"
+                        "Sentiment analysis failed for review: "
+                        f"{review_detail['review']}"
                 )
             # print(response)
             # review_detail['sentiment'] = response['sentiment']
