@@ -31,12 +31,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "localhost",
-    "https://vaishnavinik-8000.theiadockernext-1-labs-prod-theiak8s-4-tor01."
+    "https://vaishnavinik-8000.theiadockernext-0-labs-prod-theiak8s-4-tor01."
     "proxy.cognitiveclass.ai",
 ]
 CSRF_TRUSTED_ORIGINS = [
-    "https://vaishnavinik-8000.theiadockernext-1-labs-prod-theiak8s-4-tor01."
-    "proxy.cognitiveclass.ai"
+    "https://vaishnavinik-8000.theiadockernext-0-labs-prod-theiak8s-4-tor01."
+    "proxy.cognitiveclass.ai",
 ]
 
 REST_FRAMEWORK = {
@@ -94,8 +94,17 @@ WSGI_APPLICATION = "djangoproj.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+         "ENGINE": "django.db.backends.sqlite3",
+         "NAME": BASE_DIR / "db.sqlite3",
+        
+    },
+     "postgres": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "postgres",  
+        "USER": "postgres",  
+        "PASSWORD": "0xaV6tuS1cExLkTARPusD2j2",  
+        "HOST": "172.21.218.75",  
+        "PORT": "5432",  
     }
 }
 
